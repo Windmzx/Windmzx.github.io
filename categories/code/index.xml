@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code on 随风的博客</title>
+    <link>https://0xaa.top/categories/code.html</link>
+    <description>Recent content in Code on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 30 May 2018 20:09:07 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>基于maven的spring多module模块实战</title>
+      <link>https://0xaa.top/159.html</link>
+      <pubDate>Wed, 30 May 2018 20:09:07 +0000</pubDate>
+      
+      <guid>https://0xaa.top/159.html</guid>
+      <description>&lt;p&gt;写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA+maven+sping boot 话不多说，直接上代码。&lt;/p&gt;
+&lt;p&gt;1、建立父项目&lt;/p&gt;
+&lt;p&gt;使用root来定义我们的父项目 &lt;img src=&#34;https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180530195808.png&#34; alt=&#34;&#34;&gt; 建立好之后，删掉src目录，只留下pom.xml。 修改pom:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;把packaging方式由jar改为pom&lt;/li&gt;
+&lt;li&gt;如果父项目有build节点的话，删除掉&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2分别建立几个module&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

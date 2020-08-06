@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>二叉树最近的公共祖先节点 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/lowestcommonancestorofabinarytree.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="二叉树最近的公共祖先节点" />
+<meta property="og:description" content="给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/lowestcommonancestorofabinarytree.html" />
+<meta property="article:published_time" content="2020-04-03T14:32:07+08:00" />
+<meta property="article:modified_time" content="2020-04-03T14:32:07+08:00" />
+<meta itemprop="name" content="二叉树最近的公共祖先节点">
+<meta itemprop="description" content="给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个">
+<meta itemprop="datePublished" content="2020-04-03T14:32:07+08:00" />
+<meta itemprop="dateModified" content="2020-04-03T14:32:07+08:00" />
+<meta itemprop="wordCount" content="661">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="二叉树最近的公共祖先节点"/>
+<meta name="twitter:description" content="给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">二叉树最近的公共祖先节点</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+</blockquote>
+<p>这个题，我一开始陷入了误区，我想到的事，分别递归的便利左右子树，如果字数中包含p或者q节点，我们就返回True，如果一直到None都没有找到p或者q，说明这一子树中没有不可能是两个节点的最近公告祖先。如果一个节点的左右子树返回的都是True，那么这个节点就是祖先节点。</p>
+<p>但是这样的算法笔记比较麻烦。需要写helper函数进行递归，而helper的返回值是布尔值不能直接返回给题目的要求。</p>
+<p>查看评论区，我们可以发现一个新思路，用Null来表示这一支没有q或者p，因为当我们遍历到子树的叶节点还没有p、q，返回的就是null，如果有，返回的则是q或者q的指针。与布尔值进行判断相同。如果我们返回的两个指针都是有值的，说明当前节点的左右子树中包含p、q且是最近的。</p>
+<p>这样的算法就很简洁了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode:</span>
+<span class="c1">#     def __init__(self, x):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.left = None</span>
+<span class="c1">#         self.right = None</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="s1">&#39;TreeNode&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="s1">&#39;TreeNode&#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="s1">&#39;TreeNode&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TreeNode&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">root</span> <span class="o">==</span> <span class="n">q</span> <span class="ow">or</span> <span class="n">root</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
+           <span class="k">return</span> <span class="n">root</span>
+        <span class="n">r1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+        <span class="n">r2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r1</span> <span class="ow">and</span> <span class="n">r2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">root</span> 
+        <span class="k">elif</span> <span class="n">r1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r2</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/leetcode739.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">LeetCode739: Daily Temperatures</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/trappingrainwater.html">
+            <span class="next-text nav-default">LeetCode(42)TrappingRainWater</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

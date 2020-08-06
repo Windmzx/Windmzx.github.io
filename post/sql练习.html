@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sql练习 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="sql训练 表结构如下 查询每门课程被选修的学生数 1 2 3 4 5 6 7 SELECT c_name, count( s_id ) as 选课人数 FROM course JOIN score ON score.c_id = course.c_id GROUP BY score.c_id 查询出只有两门课程的全部学生的学号和姓" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/sql%E7%BB%83%E4%B9%A0.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Sql练习" />
+<meta property="og:description" content="sql训练 表结构如下 查询每门课程被选修的学生数 1 2 3 4 5 6 7 SELECT c_name, count( s_id ) as 选课人数 FROM course JOIN score ON score.c_id = course.c_id GROUP BY score.c_id 查询出只有两门课程的全部学生的学号和姓" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/sql%E7%BB%83%E4%B9%A0.html" />
+<meta property="article:published_time" content="2020-06-04T09:40:46+08:00" />
+<meta property="article:modified_time" content="2020-06-04T09:40:46+08:00" />
+<meta itemprop="name" content="Sql练习">
+<meta itemprop="description" content="sql训练 表结构如下 查询每门课程被选修的学生数 1 2 3 4 5 6 7 SELECT c_name, count( s_id ) as 选课人数 FROM course JOIN score ON score.c_id = course.c_id GROUP BY score.c_id 查询出只有两门课程的全部学生的学号和姓">
+<meta itemprop="datePublished" content="2020-06-04T09:40:46+08:00" />
+<meta itemprop="dateModified" content="2020-06-04T09:40:46+08:00" />
+<meta itemprop="wordCount" content="538">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sql练习"/>
+<meta name="twitter:description" content="sql训练 表结构如下 查询每门课程被选修的学生数 1 2 3 4 5 6 7 SELECT c_name, count( s_id ) as 选课人数 FROM course JOIN score ON score.c_id = course.c_id GROUP BY score.c_id 查询出只有两门课程的全部学生的学号和姓"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Sql练习</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-04 </span>
+        
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#表结构如下">表结构如下</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>sql训练</p>
+</blockquote>
+<h1 id="表结构如下">表结构如下</h1>
+<p><img src="https://img.0xaa.top//Diagram1.png" alt="表结构"></p>
+<ul>
+<li><em>查询每门课程被选修的学生数</em></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">c_name</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span> <span class="n">s_id</span> <span class="p">)</span> <span class="k">as</span> <span class="err">选课人数</span>
+<span class="k">FROM</span>
+	<span class="n">course</span>
+	<span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">score</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">course</span><span class="p">.</span><span class="n">c_id</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">score</span><span class="p">.</span><span class="n">c_id</span>	
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询出只有两门课程的全部学生的学号和姓名</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">SELECT
+	s_id,
+	s_name 
+FROM
+	student 
+WHERE
+	s_id IN ( SELECT s_id FROM score GROUP BY s_id HAVING count( c_id ) = 2 )
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><em>查询男生、女生人数</em></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">SELECT
+	s_sex,
+	count( s_id ) 
+FROM
+	student 
+GROUP BY
+	s_sex
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询名字中含有&quot;风&quot;字的学生信息</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">s_id</span><span class="p">,</span>
+	<span class="n">s_name</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">s_name</span> <span class="k">LIKE</span> <span class="s1">&#39;%风%&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询1990年出生的学生名单</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">s_id</span><span class="p">,</span>
+	<span class="n">s_name</span><span class="p">,</span>
+	<span class="n">s_birth</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span> 
+<span class="k">WHERE</span>
+	<span class="n">s_birth</span> <span class="k">LIKE</span> <span class="s1">&#39;1990%&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">c_id</span><span class="p">,</span>
+	<span class="n">ROUND</span><span class="p">(</span> <span class="k">avg</span><span class="p">(</span> <span class="n">s_score</span> <span class="p">),</span> <span class="mi">2</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">avg_scoce</span> 
+<span class="k">FROM</span>
+	<span class="n">score</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">c_id</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="n">avg_scoce</span> <span class="k">DESC</span><span class="p">,</span>
+	<span class="n">c_id</span> <span class="k">ASC</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询平均成绩大于等于85的所有学生的学号、姓名和平均成绩</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
+	<span class="n">s_name</span><span class="p">,</span>
+	<span class="k">avg</span><span class="p">(</span> <span class="n">s_score</span> <span class="p">)</span> <span class="k">AS</span> <span class="n">avg_score</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">s_id</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">s_id</span> 
+<span class="k">HAVING</span>
+	<span class="n">avg_score</span> <span class="o">&gt;</span> <span class="mi">85</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
+	<span class="n">s_name</span><span class="p">,</span>
+	<span class="n">round</span><span class="p">(</span> <span class="k">avg</span><span class="p">(</span> <span class="n">s_score</span> <span class="p">),</span> <span class="mi">2</span> <span class="p">)</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">s_id</span> 
+<span class="k">WHERE</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">s_id</span> <span class="k">IN</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">s_id</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">WHERE</span> <span class="n">s_score</span> <span class="o">&lt;</span> <span class="mi">60</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">s_id</span> <span class="k">HAVING</span> <span class="k">count</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="p">)</span> 
+<span class="k">GROUP</span> <span class="k">BY</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
+	<span class="n">student</span><span class="p">.</span><span class="n">s_name</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><em>检索&quot;01&quot;课程分数小于60，按分数降序排列的学生信息</em></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+	<span class="o">*</span> 
+<span class="k">FROM</span>
+	<span class="n">student</span>
+	<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">score</span> <span class="k">ON</span> <span class="n">student</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="n">s_id</span> 
+<span class="k">WHERE</span>
+	<span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;01&#39;</span> 
+	<span class="k">AND</span> <span class="n">s_score</span> <span class="o">&lt;</span> <span class="mi">60</span> 
+<span class="k">ORDER</span> <span class="k">BY</span>
+	<span class="n">s_score</span> <span class="k">DESC</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">select s_id from score group by 
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/miui11_enable_bluetooth.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MIUI开启蓝牙耳机AAC模式</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/springboot%E9%83%A8%E7%BD%B2.html">
+            <span class="next-text nav-default">SpringBoot部署</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

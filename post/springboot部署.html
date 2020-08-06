@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SpringBoot部署 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="完成了一个springboot的项目，打算部署到公网上，写下此文，记录过程中的尝试 Dome地址 问答网站 打包 1 mvn package -Dmaven.test.skip=true 把项目打包成jar包，我们" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/springboot%E9%83%A8%E7%BD%B2.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="SpringBoot部署" />
+<meta property="og:description" content="完成了一个springboot的项目，打算部署到公网上，写下此文，记录过程中的尝试 Dome地址 问答网站 打包 1 mvn package -Dmaven.test.skip=true 把项目打包成jar包，我们" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/springboot%E9%83%A8%E7%BD%B2.html" />
+<meta property="article:published_time" content="2020-05-20T14:39:23+08:00" />
+<meta property="article:modified_time" content="2020-05-20T14:39:23+08:00" />
+<meta itemprop="name" content="SpringBoot部署">
+<meta itemprop="description" content="完成了一个springboot的项目，打算部署到公网上，写下此文，记录过程中的尝试 Dome地址 问答网站 打包 1 mvn package -Dmaven.test.skip=true 把项目打包成jar包，我们">
+<meta itemprop="datePublished" content="2020-05-20T14:39:23+08:00" />
+<meta itemprop="dateModified" content="2020-05-20T14:39:23+08:00" />
+<meta itemprop="wordCount" content="1168">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SpringBoot部署"/>
+<meta name="twitter:description" content="完成了一个springboot的项目，打算部署到公网上，写下此文，记录过程中的尝试 Dome地址 问答网站 打包 1 mvn package -Dmaven.test.skip=true 把项目打包成jar包，我们"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">SpringBoot部署</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-20 </span>
+        
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#打包">打包</a></li>
+        <li><a href="#部署">部署</a>
+          <ul>
+            <li><a href="#开启mysql">开启mysql</a></li>
+            <li><a href="#开启项目">开启项目</a></li>
+            <li><a href="#容器互联问题">容器互联问题</a></li>
+            <li><a href="#redis部署">Redis部署</a></li>
+          </ul>
+        </li>
+        <li><a href="#遇到的问题">遇到的问题</a>
+          <ul>
+            <li><a href="#数据库总是连接超时">数据库总是连接超时</a></li>
+            <li><a href="#静态资源访问太慢">静态资源访问太慢</a></li>
+            <li><a href="#后记">后记</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>完成了一个springboot的项目，打算部署到公网上，写下此文，记录过程中的尝试
+Dome地址 <a href="http://wenda.0xaa.top">问答网站</a></p>
+</blockquote>
+<h2 id="打包">打包</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mvn package -Dmaven.test.skip<span class="o">=</span><span class="nb">true</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>把项目打包成jar包，我们可以使用内置的tomcat来部署，只需要运行<code>java -jar app.jar</code>就可以启动项目</p>
+<p>将打包完的jar包拷贝到服务器上，使用一下dockerfile打包成docker镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM java:8
+VOLUME /tmp
+ADD wenda.jar wenda.jar
+EXPOSE 8080
+ENTRYPOINT [&#34;java&#34;,&#34;-Djava.security.egd=file:/dev/./urandom&#34;,&#34;-jar&#34;,&#34;/wenda.jar&#34;]
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="部署">部署</h2>
+<h3 id="开启mysql">开启mysql</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run -p 3306:3306 --name mysql -v <span class="nv">$PWD</span>/conf:/etc/mysql/conf.d -v <span class="nv">$PWD</span>/logs:/logs -v <span class="nv">$PWD</span>/data:/var/lib/mysql -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root5rdx<span class="nv">$ESZ</span> -d mysql:5.7
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="开启项目">开启项目</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run -p 8080:8080 --name wenda -e <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="m">123456</span> -e <span class="nv">REDIS_HOST</span><span class="o">=</span>redis mzx/wenda
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="容器互联问题">容器互联问题</h3>
+<ol>
+<li>msql并不安全</li>
+<li>数据库的主机名随着部署环境的变化，需要重新修改打包</li>
+</ol>
+<p>在docker的以前的版本中，我们可以使用<code>--link</code>选项将我们的应用镜像和容器镜像绑定到一个网桥上，并由Docker引擎刷新hosts。后来的版本推荐使用用户自定义网络。
+我们创建一个网桥属性的网络，将后来的容器都部署到这个网络中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker network create -d bridge blog
+</code></pre></td></tr></table>
+</div>
+</div><p>此时，数据库的启动脚本变为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run  --name mysql --network<span class="o">=</span>blog *** mysql
+</code></pre></td></tr></table>
+</div>
+</div><p>我们的容器也同样使用<code>--network</code>属性绑定网络。
+这个时候我们就可以在Spring的配置文件中使用mysql等主机名连接数据库，但是这又和我们本地的环境相互冲突，在调试和打包的时候需要修改配置。我们可以使用环境变量来传递数据库的主机名和密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/wenda?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;autoReconnect=true&amp;failOverReadOnly=false
+REDIS_HOST=localhost
+spring.datasource.username=${MYSQL_USER:root}
+spring.datasource.password=${MYSQL_PASSWORD:root}
+</code></pre></td></tr></table>
+</div>
+</div><p>其中直接在配置文件中获取环境变量就<code>${:}</code>获取，等号前面是环境变量的名字，等号后面则是不存在环境变量的时候的默认值。
+在代码中则使用<code>@Value</code>注解获取。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">@Value(&#34;${REDIS_HOST}&#34;)String redis_host;
+</code></pre></td></tr></table>
+</div>
+</div><p>就可以注入到类中，如果环境变量中没有，则去配置文件读取默认值。
+在启动镜像的时候使用<code>-e Een:Envval</code>就i可以传递环境变量。</p>
+<h3 id="redis部署">Redis部署</h3>
+<p>我们的项目中使用了Redis，因此我们需要使用Docker部署一个Redis容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run --name some-redis --network<span class="o">=</span>blog  -v /root/wenda/reidsdata/:/data -d redis redis-server --appendonly yes
+</code></pre></td></tr></table>
+</div>
+</div><p>使用<code>--appendonly yes</code>进行持久化，具体可以搜索Redis的两种持久化方式。</p>
+<h2 id="遇到的问题">遇到的问题</h2>
+<h3 id="数据库总是连接超时">数据库总是连接超时</h3>
+<p>在一段时间没有流量的时候，数据库总是连接超时。即使我们在数据库连接后面增加了<code>autoReconnect=true&amp;failOverReadOnly=false</code>也会出现这个问题。我们可以调整数据库的超时时间，但是超时时间不能无限增加，可能会保存过多的连接导致性能浪费。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">spring.datasource.test-while-idle=true
+spring.datasource.time-between-eviction-runs-millis=8000
+spring.datasource.min-evictable-idle-time-millis=1000
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以考对连接池进行配置，进行检测。</p>
+<h3 id="静态资源访问太慢">静态资源访问太慢</h3>
+<p>我用的是白嫖的阿里云主机，只有1M的带宽。大的js和图片那叫一个慢啊。
+可以使用阿里云的oss来加速访问。
+首先我们在阿里云oss控制台新建一个bucket。
+然后将spring boot staic中的静态文件上传。
+然后在nginx里如下配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server {
+        listen 80;
+        server_name  wenda.0xaa.top;
+
+        location / {
+        # pass to aproxy
+        proxy_pass http://127.0.0.1:8080;
+        }
+
+        location /styles {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+
+        location /images {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+        location /scripts {
+        expires 24h;
+        proxy_pass http://mzxwenda.oss-cn-beijing.aliyuncs.com;
+        }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="后记">后记</h3>
+<h4 id="adminer">adminer</h4>
+<p>一个非常简单轻量级的mysqlui，用于导入数据之后的非常方便</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/sql%E7%BB%83%E4%B9%A0.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Sql练习</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/netty%E5%BC%80%E5%8F%91%E9%87%87%E5%9D%91.html">
+            <span class="next-text nav-default">Netty开发采坑</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

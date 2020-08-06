@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hardware on 随风的博客</title>
+    <link>https://0xaa.top/tags/hardware.html</link>
+    <description>Recent content in hardware on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 05 Apr 2018 19:41:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>路由器上的Drcom及IPV6支持</title>
+      <link>https://0xaa.top/115.html</link>
+      <pubDate>Thu, 05 Apr 2018 19:41:11 +0000</pubDate>
+      
+      <guid>https://0xaa.top/115.html</guid>
+      <description>学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由</description>
+    </item>
+    
+    <item>
+      <title>玩转树莓派</title>
+      <link>https://0xaa.top/105.html</link>
+      <pubDate>Thu, 05 Apr 2018 09:46:47 +0000</pubDate>
+      
+      <guid>https://0xaa.top/105.html</guid>
+      <description>&lt;p&gt;树莓派作为一个款风靡全球的极客玩具,获得了极大的关注,我也买了几台拿来尝尝鲜.其默认的设置可能不适合所有的人,于是写下这篇文章,记录在正式之前娱乐之前,对他的调教.&lt;/p&gt;
+&lt;h3 id=&#34;wifi问题&#34;&gt;WIFI问题&lt;/h3&gt;
+&lt;p&gt;树莓派3升级了无线网卡,使其支持wifi功能.正好你家里没有多余的网线,怎么能让他在第一次开机就能连接无线呢? 方法是在/boot分区里新建一个文件wpa_supplicant.conf&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;country=CN
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+ssid=&amp;quot;WiFi-A&amp;quot;
+psk=&amp;quot;12345678&amp;quot;
+key_mgmt=WPA-PSK
+priority=1
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;  priority表示优先级.注意树莓派3目前并不支持5G WIFI&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>路由器上进行drcom认证</title>
+      <link>https://0xaa.top/101.html</link>
+      <pubDate>Wed, 04 Apr 2018 21:15:56 +0000</pubDate>
+      
+      <guid>https://0xaa.top/101.html</guid>
+      <description>吉大的校园网说实话还是很不错的，每个月20，常用资源分分钟上100m，还有教育网ipv6的资源。但是手机和电脑只能同时在线一个（更新：现在能</description>
+    </item>
+    
+  </channel>
+</rss>

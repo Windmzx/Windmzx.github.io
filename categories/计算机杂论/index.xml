@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机杂论 on 随风的博客</title>
+    <link>https://0xaa.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA.html</link>
+    <description>Recent content in 计算机杂论 on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 26 Nov 2018 15:55:19 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python问题记录</title>
+      <link>https://0xaa.top/204.html</link>
+      <pubDate>Mon, 26 Nov 2018 15:55:19 +0000</pubDate>
+      
+      <guid>https://0xaa.top/204.html</guid>
+      <description>&lt;p&gt;在这里放一些写代码中遇到的Python问题&lt;/p&gt;
+&lt;h2 id=&#34;module-object-has-no-attribute-ssl_st_init&#34;&gt;&amp;lsquo;module&amp;rsquo; object has no attribute &amp;lsquo;SSL_ST_INIT&amp;rsquo;&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL
+    rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info
+    sudo pip install pyopenssl
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;  &lt;a href=&#34;https://stackoverflow.com/questions/45188413/python-pip-install-is-failing-with-attributeerror-module-object-has-no-att/45291334#45291334?newreg=12af3db87aad43459735cbd7b3854604&#34;&gt;stackoverflow&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>实验室网站问题排查</title>
+      <link>https://0xaa.top/200.html</link>
+      <pubDate>Mon, 26 Nov 2018 15:26:02 +0000</pubDate>
+      
+      <guid>https://0xaa.top/200.html</guid>
+      <description>&lt;p&gt;突然发现wordpress与gitea不能正常访问 wordpress直接显示 cannot establish connection 蜜汁报错，没有有效信息 修改wordpress的config.php文件 显示debug信息&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;define (&#39;WP_DEBUG&#39;,&#39;TRUE&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;之后访问发现报错如下&lt;/p&gt;
+&lt;p&gt;The server requested authentication method unknown to the client&lt;/p&gt;
+&lt;p&gt;google之后发现是mysql版本升级之后，密码验证机制改了，而php等还不支持。运行下列命令修复&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HEXO的部署-使用git来更新你的博客</title>
+      <link>https://0xaa.top/193.html</link>
+      <pubDate>Thu, 13 Sep 2018 20:34:18 +0000</pubDate>
+      
+      <guid>https://0xaa.top/193.html</guid>
+      <description>&lt;h2 id=&#34;服务器端&#34;&gt;服务器端&lt;/h2&gt;
+&lt;h3 id=&#34;建立git仓库&#34;&gt;建立git仓库&lt;/h3&gt;
+&lt;p&gt;在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;    mkdir data.git
+    cd data.git
+    git init --bare
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker使用速记</title>
+      <link>https://0xaa.top/183.html</link>
+      <pubDate>Thu, 26 Jul 2018 09:19:01 +0000</pubDate>
+      
+      <guid>https://0xaa.top/183.html</guid>
+      <description>&lt;p&gt;docker作为最近新出现的技术，一下子席卷了全球的开发者社区，无论是科研或者是商业应用，其都获得了迅猛的发展。实验室搭建了docker-swarm集群，并部署了storm、haddop、web、git托管等一系列的服务。 在docke使用过程中遇到一些问题，记录在下面解决一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Neo4j使用总结</title>
+      <link>https://0xaa.top/176.html</link>
+      <pubDate>Thu, 19 Jul 2018 13:15:44 +0000</pubDate>
+      
+      <guid>https://0xaa.top/176.html</guid>
+      <description>&lt;p&gt;实验室研究的方向是异质信息网络，因此图数据库是一个非常常用的工具。这篇文章记录 一些问题便于速查。&lt;/p&gt;
+&lt;h3 id=&#34;py2neo的版本&#34;&gt;py2neo的版本&lt;/h3&gt;
+&lt;p&gt;为了操作Neo4j数据库，采用了python语言的一个包，py2neo。 py2neo比较常用的有三个大版本。v2,v3,v4每个版本之间的差异比较大。其中v3有个Grapg.data()函数，可以执行原生的cypher语句并返回一个python原生的结果集。但是如果你不注意pip安装的时候指定脚本就会发送找不到data()函数的错误。neo4j graph has no attribute data 这个时候需要指定安装版本。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;    pip3 install &amp;#34;py2neo&amp;gt;3.0,&amp;lt;4.0&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>姿势大全</title>
+      <link>https://0xaa.top/171.html</link>
+      <pubDate>Fri, 13 Jul 2018 18:40:59 +0000</pubDate>
+      
+      <guid>https://0xaa.top/171.html</guid>
+      <description>&lt;p&gt;无论作为一个开发者（程序猿），还是一名苦逼的憋论文的计算机研究僧，有两项重要的技能点。首先就是英语能力：无论是先进开源项目的文档，还是为了骗过编辑写的云里雾里的论文，我们都需要掌握熟练的英语，至少是需要有极强的阅读能力。其次就是要掌握各种扶墙姿势，无论是浏览网页，跑程序，在windows下，linux下还是终端或者是代码里。掌握了数量众多的扶墙姿势才能愉快的面向google编程。 首先扶墙需要你有一个梯子，这种东西网上一搜遍地都是，就不介绍了。本人习惯使用的是小飞机基于Socket5的工具，但是并不是所有的程序都能使用小飞机，因此我们就需要一些姿势帮助我们看看外面的世界。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>maven打包项目成可执行文件</title>
+      <link>https://0xaa.top/166.html</link>
+      <pubDate>Wed, 13 Jun 2018 08:50:08 +0000</pubDate>
+      
+      <guid>https://0xaa.top/166.html</guid>
+      <description>通常情况下我们使用ide写的项目如果想打包成可执行文件的话，使用ide的导出功能就行，如果我们的项目有一些依赖，那么就不能依赖ide的功能实</description>
+    </item>
+    
+    <item>
+      <title>spring多项目问题记录</title>
+      <link>https://0xaa.top/157.html</link>
+      <pubDate>Wed, 30 May 2018 16:21:58 +0000</pubDate>
+      
+      <guid>https://0xaa.top/157.html</guid>
+      <description>&lt;h1 id=&#34;jpa问题&#34;&gt;jpa问题&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error creating bean with name &amp;lsquo;entityManagerFactory&amp;rsquo; defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]:
+Invocation of init method failed; nested exception is org.hibernate.AnnotationException:
+No identifier specified for entity: com.mzx.ntms.model.Student&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;从英语就能看出没有指定ID，当使用data jpa的时候在Entity上指定主键，使用javax.persistence.Id;的@id指定即可&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker集群故障排查</title>
+      <link>https://0xaa.top/139.html</link>
+      <pubDate>Sun, 08 Apr 2018 21:29:37 +0000</pubDate>
+      
+      <guid>https://0xaa.top/139.html</guid>
+      <description>&lt;h1 id=&#34;swarm集群&#34;&gt;swarm集群&lt;/h1&gt;
+&lt;p&gt;本来是想检查一下集群的安全状态，集群里挂载了一个ssr作为代理，想查阅一下日志。没想到docker集群挂了，甚至有一个刀片机器挂掉了，没办法只能叫厂商来修。 集群状态是所有的节点都不能执行管理命令。使用&lt;code&gt;docker node ls&lt;/code&gt;无法查看节点身份直接返回错误&lt;img src=&#34;https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180513193220.png&#34; alt=&#34;&#34;&gt; 尝试几次之后判断无法解决。使用命令&lt;code&gt;docker swarm leave -force&lt;/code&gt;强制离开集群，并重建集群。 此时时间到了晚上，第二天继续维护的时候，发现管理节点依然不能管理报错如下 &lt;img src=&#34;https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180513193748.png&#34; alt=&#34;&#34;&gt; 后来发现是node节点身份发生了变化，登陆节点失去了管理员节点身份。ssh到另一台机器上之后重新生成一个token就能成功加入了。 至此docker swarm解决完毕。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wordpress博客的https化</title>
+      <link>https://0xaa.top/125.html</link>
+      <pubDate>Fri, 06 Apr 2018 23:04:21 +0000</pubDate>
+      
+      <guid>https://0xaa.top/125.html</guid>
+      <description>&lt;p&gt;随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&amp;rsquo;s Encrypt比较流行。但是有个问题就是Let&amp;rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。&lt;a href=&#34;https://github.com/Neilpang/acme.sh&#34;&gt;项目地址&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker镜像</title>
+      <link>https://0xaa.top/120.html</link>
+      <pubDate>Fri, 06 Apr 2018 18:07:05 +0000</pubDate>
+      
+      <guid>https://0xaa.top/120.html</guid>
+      <description>酸酸乳 FROM ubuntu:16.04 MAINTAINER mzx 2281927774@qq.com RUN apt-get update --fix-missing &amp;amp;&amp;amp; apt-get install -y git &amp;amp;&amp;amp; apt-get clean RUN git clone https://github.com/ssrbackup/shadowsocksr /usr CMD [&amp;quot;python&amp;quot;,&amp;quot;/usr/shadowsocksr/shadowsocks/local.py&amp;quot;,&amp;quot;-c&amp;quot;,&amp;quot;/etc/shadowsocks.json&amp;quot;] python环境 FROM ubuntu:16.04 MAINTAINER mzx 2281927774@qq.com RUN apt-get update --fix-missing &amp;amp;&amp;amp; apt-get install -y wget bzip2 ca- libglib2.0-0 libxext6 libsm6 libxrender1 git vim fish RUN echo &#39;export PATH=/opt/conda/bin:$PATH&#39; &amp;gt; /etc/profile.d/conda.sh wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Li /bin/bash ~/anaconda.sh -b</description>
+    </item>
+    
+    <item>
+      <title>路由器上的Drcom及IPV6支持</title>
+      <link>https://0xaa.top/115.html</link>
+      <pubDate>Thu, 05 Apr 2018 19:41:11 +0000</pubDate>
+      
+      <guid>https://0xaa.top/115.html</guid>
+      <description>学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由</description>
+    </item>
+    
+    <item>
+      <title>hexo搭配nginx搭建静态博客</title>
+      <link>https://0xaa.top/103.html</link>
+      <pubDate>Wed, 04 Apr 2018 21:18:23 +0000</pubDate>
+      
+      <guid>https://0xaa.top/103.html</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。&lt;br&gt;
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;安装过程&#34;&gt;安装过程：&lt;/h1&gt;
+&lt;p&gt;环境：Centos 7.1 x64&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>解决windows资源管理器提示桌面不可用的问题</title>
+      <link>https://0xaa.top/99.html</link>
+      <pubDate>Wed, 04 Apr 2018 21:13:29 +0000</pubDate>
+      
+      <guid>https://0xaa.top/99.html</guid>
+      <description>很多人用压缩软件或者文件管理工具的时候都遇到过引用了一个不可用的位置如下图的问题 首先是打开注册表编辑器,windows键+R键输入reged</description>
+    </item>
+    
+    <item>
+      <title>使用git来更新你的博客</title>
+      <link>https://0xaa.top/98.html</link>
+      <pubDate>Wed, 04 Apr 2018 21:11:50 +0000</pubDate>
+      
+      <guid>https://0xaa.top/98.html</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上一篇文章中，我们用hexo和nginx搭建了一个静态博客，但是我们怎么更新博客呢？每次都用ftp登陆服务器之后，手动的把文章传上去？每次修改文章之后也要上传一次？其实不用，我们可以用git这个强大的工具来完成。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;服务器端&#34;&gt;&lt;strong&gt;服务器端&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;建立git仓库&#34;&gt;建立git仓库&lt;/h3&gt;
+&lt;p&gt;在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir data.git
+cd data.git
+git init --bare
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

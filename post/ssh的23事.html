@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SSH的23事 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="Linux作为开发者的必备利器，经常使用到。但是因其发行版众多和Xserver的效率比不上windows和mac，因此我们还是常使用虚拟机或" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/ssh%E7%9A%8423%E4%BA%8B.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="SSH的23事" />
+<meta property="og:description" content="Linux作为开发者的必备利器，经常使用到。但是因其发行版众多和Xserver的效率比不上windows和mac，因此我们还是常使用虚拟机或" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/ssh%E7%9A%8423%E4%BA%8B.html" />
+<meta property="article:published_time" content="2019-09-03T19:55:01+00:00" />
+<meta property="article:modified_time" content="2019-09-03T19:55:01+00:00" />
+<meta itemprop="name" content="SSH的23事">
+<meta itemprop="description" content="Linux作为开发者的必备利器，经常使用到。但是因其发行版众多和Xserver的效率比不上windows和mac，因此我们还是常使用虚拟机或">
+<meta itemprop="datePublished" content="2019-09-03T19:55:01+00:00" />
+<meta itemprop="dateModified" content="2019-09-03T19:55:01+00:00" />
+<meta itemprop="wordCount" content="480">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SSH的23事"/>
+<meta name="twitter:description" content="Linux作为开发者的必备利器，经常使用到。但是因其发行版众多和Xserver的效率比不上windows和mac，因此我们还是常使用虚拟机或"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">SSH的23事</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-03 </span>
+        
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#不使用xshell等工具管理远程主机">不使用Xshell等工具管理远程主机</a></li>
+            <li><a href="#ssh登陆很慢">SSH登陆很慢</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Linux作为开发者的必备利器，经常使用到。但是因其发行版众多和Xserver的效率比不上windows和mac，因此我们还是常使用虚拟机或远程开发机。</p>
+<p>本文将记录下使用linux系统的一些简单命令或优化操作，毕竟好记性不如烂笔头。</p>
+<h3 id="不使用xshell等工具管理远程主机">不使用Xshell等工具管理远程主机</h3>
+<p>因为我们必然有不止一台主机，如何在不使用第三方管理工具的情况下快速登陆多个主机呢。一种方法便是ssh config。注意使用sshconfig需要使用密钥登陆。
+1、首先在本地生成密钥对</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ssh-keygen -t rsa
+</code></pre></td></tr></table>
+</div>
+</div><p>2、其次将密钥对拷贝到远程主机上<code>ssh-copy-id user@server</code> 可以使用-i 参数指定本地的密钥文件。</p>
+<p>3、在<code>~/.ssh/conig </code>文件中填入主机的配置信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Host 229
+    Hostname 192.168.1.229
+    Port 22
+    User test
+    IdentityFile ~/.ssh/id_rsa
+</code></pre></td></tr></table>
+</div>
+</div><p>4、在命令行中使用<code>ssh </code>加上文件中设置的别名即可一键登陆。</p>
+<h3 id="ssh登陆很慢">SSH登陆很慢</h3>
+<p>我们的机器都在一个大局域网下，每次登陆发现速度都很慢，表现就是很长时间后才会提示你输入密码。这个是因为远程主机在尝试反向解析客户端的hostname。我们将远程主机的这个服务禁用即可。
+编辑<code>etc/ssh/sshd_config</code> 将设置改为如下<code>UseDNS no</code>,<code>GSSAPIAuthentication no</code></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/quickly-deploy-flink-clusters-via-vagrant.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">通过vagrant快速部署flink集群</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/isr-not-in-iram.html">
+            <span class="next-text nav-default">ISR NOT in IRAM</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>HEXO的部署-使用git来更新你的博客 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="服务器端 建立git仓库 在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。
+1 2 3  mkdir data.git cd data.git git init --bare   " /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/193.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="HEXO的部署-使用git来更新你的博客" />
+<meta property="og:description" content="服务器端
+建立git仓库
+在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。
+
+
+1
+2
+3
+
+
+    mkdir data.git
+    cd data.git
+    git init --bare
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/193.html" />
+<meta property="article:published_time" content="2018-09-13T20:34:18+00:00" />
+<meta property="article:modified_time" content="2018-09-13T20:34:18+00:00" />
+<meta itemprop="name" content="HEXO的部署-使用git来更新你的博客">
+<meta itemprop="description" content="服务器端
+建立git仓库
+在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。
+
+
+1
+2
+3
+
+
+    mkdir data.git
+    cd data.git
+    git init --bare
+
+
+">
+<meta itemprop="datePublished" content="2018-09-13T20:34:18+00:00" />
+<meta itemprop="dateModified" content="2018-09-13T20:34:18+00:00" />
+<meta itemprop="wordCount" content="728">
+
+
+
+<meta itemprop="keywords" content="blog," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HEXO的部署-使用git来更新你的博客"/>
+<meta name="twitter:description" content="服务器端
+建立git仓库
+在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。
+
+
+1
+2
+3
+
+
+    mkdir data.git
+    cd data.git
+    git init --bare
+
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">HEXO的部署-使用git来更新你的博客</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-13 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/"> 计算机杂论 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#服务器端">服务器端</a>
+          <ul>
+            <li><a href="#建立git仓库">建立git仓库</a></li>
+            <li><a href="#自动更新网站文件">自动更新网站文件</a></li>
+            <li><a href="#本地端">本地端</a></li>
+          </ul>
+        </li>
+        <li><a href="#安全问题">安全问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="服务器端">服务器端</h2>
+<h3 id="建立git仓库">建立git仓库</h3>
+<p>在服务器建立建立一个文件夹blog来存放文件，在blog下新建一个文件夹data.git作为git仓库。-bare是建立一个裸仓库，既只允许远程提交。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    mkdir data.git
+    cd data.git
+    git init --bare
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="自动更新网站文件">自动更新网站文件</h3>
+<p>原理是就git的钩子，每当发生推送等动作的时候，git就会自动执行你事先设置好的脚本。 创建一个文件夹来存放网站文件,由于在本地push之后，更改的是只是.git仓库里面的内容，并没有具体的文件存储在工作空间里。所以我们使用钩子进行checkout，来还原网页文件，以便于nginx进行显示。 新建一个文件hooks/post-receive输入以下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    #!/bin/sh
+    export GIT_WORK_TREE=*/web 
+    git checkout -f
+</code></pre></td></tr></table>
+</div>
+</div><p>  因为是bare仓库，无法直接执行checkout操作，因此我们需要制定一个环境变量<code>GIT_WORK_TREE</code>，否正的话，git不会允许你的操作 添加可执行权限  </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    chmod +x post-receive
+</code></pre></td></tr></table>
+</div>
+</div><p>  这里有个问题是你使用hexo d将博客部署到服务器之后，刷新检出目录会发现里面空空如也，多次检查权限之后，仍然不能成功的部署。仔细检查控制台输出之后发现，提示一行小字<code>nothing to commit, working tree clean</code>猜测会不会是没有更改，导致部署不上去。对文章进行小修改之后，上上传发现已经能成功的将public文件夹部署到服务器。</p>
+<h3 id="本地端">本地端</h3>
+<p>我们新建立一个文件夹，命名为web然后在这个文件夹搭建hexo环境。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    hexo init web/
+    cd web
+    npm install
+</code></pre></td></tr></table>
+</div>
+</div><p>npm在国内真的是非常慢，同样都是国外的pip docker，简直慢的不能忍受，还是采用阿里提供的镜像服务吧。编辑好文章后利用git更新就好。 每次完成写作之后，使用 hexo d -g就可以完成更新到服务器。</p>
+<h2 id="安全问题">安全问题</h2>
+<p>为了保证安全，我们需要使用一个独立的git用户，并且禁止他的ssh登录权限，避免加入sudo组，防止其提权。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/blog/">blog</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/200.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">实验室网站问题排查</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/183.html">
+            <span class="next-text nav-default">Docker使用速记</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

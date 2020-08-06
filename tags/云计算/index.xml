@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>云计算 on 随风的博客</title>
+    <link>https://0xaa.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97.html</link>
+    <description>Recent content in 云计算 on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 06 Sep 2019 19:31:40 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>通过vagrant快速部署flink集群</title>
+      <link>https://0xaa.top/post/quickly-deploy-flink-clusters-via-vagrant.html</link>
+      <pubDate>Fri, 06 Sep 2019 19:31:40 +0000</pubDate>
+      
+      <guid>https://0xaa.top/post/quickly-deploy-flink-clusters-via-vagrant.html</guid>
+      <description>flink作为新一代的流式计算平台，为了学习这个平台我们首先肯定要在自己的机器上搭建一个尝试一下。每次搭建环境都是一个噩梦，幸而有了dock</description>
+    </item>
+    
+  </channel>
+</rss>

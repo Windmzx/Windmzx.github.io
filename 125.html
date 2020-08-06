@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>wordpress博客的https化 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&amp;rsquo;s Encrypt比较流行。但是有个问题就是Let&amp;rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。项目地址
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/125.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="wordpress博客的https化" />
+<meta property="og:description" content="随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&rsquo;s Encrypt比较流行。但是有个问题就是Let&rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。项目地址" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/125.html" />
+<meta property="article:published_time" content="2018-04-06T23:04:21+00:00" />
+<meta property="article:modified_time" content="2018-04-06T23:04:21+00:00" />
+<meta itemprop="name" content="wordpress博客的https化">
+<meta itemprop="description" content="随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&rsquo;s Encrypt比较流行。但是有个问题就是Let&rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。项目地址">
+<meta itemprop="datePublished" content="2018-04-06T23:04:21+00:00" />
+<meta itemprop="dateModified" content="2018-04-06T23:04:21+00:00" />
+<meta itemprop="wordCount" content="1415">
+
+
+
+<meta itemprop="keywords" content="blog," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="wordpress博客的https化"/>
+<meta name="twitter:description" content="随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&rsquo;s Encrypt比较流行。但是有个问题就是Let&rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。项目地址"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">wordpress博客的https化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"> 未分类 </a>
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/"> 计算机杂论 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#证书的申请">证书的申请</a></li>
+    <li><a href="#nginx的配置">nginx的配置</a></li>
+    <li><a href="#wordpress程序的修改">wordpress程序的修改</a></li>
+    <li><a href="#301跳转">301跳转</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>随着互联网的发展，https逐渐登上了历史的舞台。https的好处有很多，例如，可以避免isp的广告植入，更好的安全性，除了用户自己，别人都只能看见通信的头信息，而看不到具体的内容，避免了一些隐私的泄露。 谷歌对于推进https是非常热心的，最近的谷歌浏览器对于全站的https站点直接标上了安全两个字。并且对于https的站点，在检索的时候会提高网站的权重，对于seo也是一个好处。 https就必然涉及到ssl证书，自己签发一个显然是不可以的，很明显你不值得谷歌信任你。强如铁老大，让用户自己装证书的狠角色现在也买了证书，甚至cnnic都用了别人的证书。之前有试用过好几款免费的证书，很不幸他们都因为违规签发GitHub或者谷歌的证书，被谷歌给移除了信任列表，真是不作死就不会死啊。 现在免费的证书Let&rsquo;s Encrypt比较流行。但是有个问题就是Let&rsquo;s Encrypt的有效期只有90天，需要自己签约，但是万能的github有人做出了一键脚本，能完成验证和自动更新。<a href="https://github.com/Neilpang/acme.sh">项目地址</a></p>
+<h1 id="证书的申请">证书的申请</h1>
+<hr>
+<p>完全使用这个脚本就可以完成一键域名验证以及申请，并且会帮你自动续期</p>
+<h1 id="nginx的配置">nginx的配置</h1>
+<hr>
+<p>附docker-compose配置如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    version: &#39;2&#39;
+    services:
+    mysql:
+    image: mysql:5.6
+    restart: always
+    environment:
+    MYSQL_ROOT_PASSWORD: demo
+    volumes:
+    - /root/wp-mysql:/var/lib/mysql
+    wordpress:
+    image: wordpress
+    restart: always
+    ports:
+    - 8001:80
+    environment:
+    WORDPRESS_DB_PASSWORD: demo
+    volumes:
+    - /root/wp-file:/var/www/html
+    hpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - 8188:80
+    environment:
+    PMA_HOST: mysql
+</code></pre></td></tr></table>
+</div>
+</div><p>  我的博客是在docker上跑了一个wordpress和mysql数据库。只暴露了wordpress的端口，php和mysql的通信采用docker自定义网络实现。还挂了同学的一个站点，因此需要一个nginx转发一下。nginx几乎是现在最流行的代理服务器，利用反代功能，可以实现同端口部署多个网站，并且还可以实现负载均衡等等功能。 nginx之需要一个配置文件就可以轻松的代理我的网站。配置文件如下，首先我们同时开启80，443两个端口到wordpress，以便调试。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    server {
+            listen       443;
+            server_name  0xaa.top;
+    	ssl                  on;
+            ssl_certificate      /etc/nginx/ssl/fullchain.cer;
+    	ssl_certificate_key  /etc/nginx/ssl/0xaa.top.key;
+            ssl_session_timeout  5m;
+            location / {
+     	    proxy_set_header X-Forwarded-Proto https;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+    	    proxy_pass  http://localhost:8001;
+            }
+    }
+    
+    
+    server {
+            listen       80;
+            server_name  0xaa.top;
+            location / {
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+                proxy_pass  http://localhost:8001;
+            }
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p> </p>
+<h1 id="wordpress程序的修改">wordpress程序的修改</h1>
+<p>第一步我们首先把站点的http改为https <img src="https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180407131827-300x46.png" alt=""> 直接修改即可。 第二步，要把之前上传的图片等文件链接改为https，网上的方法有很多，修改主题等，但是一想既然已经https化，就不能再倒回去，还不如一个sql来的方便。 登陆到数据库，执行以下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    update wp_posts set post_content = replace(post_content, &#39;http://0xaa.top&#39;,&#39;https://0xaa.top&#39;);
+</code></pre></td></tr></table>
+</div>
+</div><p>这个时候本应该可以的，但是调试的时候遇到了两个大坑。</p>
+<ul>
+<li>
+<p>没有修改wordpress的时候，只用nginx代理到https时，所有的静态资源都不能访问。百般思索才发现是谷歌的安全策略问题，<img src="https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180407133333.png" alt="">允许就可以了。</p>
+</li>
+<li>
+<p>反复的重定向，导致网页完全没有办法访问，直接被浏览器拒绝。经同学提醒发现，是因为nginx配置有问题导致，wp一直以为自己收到的是http请求，不断的重定向，解决办法就是修改一下配置文件</p>
+<pre><code> proxy_set_header X-Forwarded-Proto https;
+</code></pre>
+<p>加入这一行就可以了。</p>
+</li>
+</ul>
+<p>这个时候访问，发现浏览没有问题，但是小绿锁并没有出现。。。内心千万只羊驼。打开F12检查发现，是我的主题的组件里面的链接是写死的。去后台修改一下，设置成https链接就可以了。</p>
+<h1 id="301跳转">301跳转</h1>
+<p>现在http链接已经完美的支持了，是时候让整个网站只使用https了。我们修改nginx配置文件，让http请求重定向到https。</p>
+<pre><code>server {
+        listen       80;
+        server_name  0xaa.top;
+        return 301 https://0xaa.top$request_uri;
+}
+</code></pre>
+<p>检查一下发现，ok。 <img src="https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180407134251.png" alt=""></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/blog/">blog</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/139.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">docker集群故障排查</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/120.html">
+            <span class="next-text nav-default">docker镜像</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

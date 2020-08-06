@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>路由器上的Drcom及IPV6支持 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/115.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="路由器上的Drcom及IPV6支持" />
+<meta property="og:description" content="学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/115.html" />
+<meta property="article:published_time" content="2018-04-05T19:41:11+00:00" />
+<meta property="article:modified_time" content="2018-04-05T19:41:11+00:00" />
+<meta itemprop="name" content="路由器上的Drcom及IPV6支持">
+<meta itemprop="description" content="学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由">
+<meta itemprop="datePublished" content="2018-04-05T19:41:11+00:00" />
+<meta itemprop="dateModified" content="2018-04-05T19:41:11+00:00" />
+<meta itemprop="wordCount" content="592">
+
+
+
+<meta itemprop="keywords" content="hardware," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="路由器上的Drcom及IPV6支持"/>
+<meta name="twitter:description" content="学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">路由器上的Drcom及IPV6支持</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-05 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6/"> 智能硬件 </a>
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/"> 计算机杂论 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#drcom认证">Dr.com认证</a></li>
+            <li><a href="#ipv6">IPv6</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>学校正在网络改造，给每个宿舍改成千M入户以及安装AP面板，提供更好的无线性能。路由器的作用越来越小，但是对于有很多台设备的同学来说，一个路由器还是很有必要的，可以组建局域网打游戏和安装NAS等。本文章在k2p Padavan 系统下进行，如果你照做不好使，可能是系统的差异。</p>
+<h3 id="drcom认证">Dr.com认证</h3>
+<p>为了愉快的上网，江山代有才人出。各位大佬相继开发了c，java，python，c#等等版本的客户端，今天介绍一个学弟写的c版，可以交叉编译成arm版，直接运行。 <a href="https://github.com/hyec/drcomlite">https://github.com/hyec/drcomlite</a> 编译之放在/usr/local/bin里面，即可运行（注意添加权限，据说师弟要发release，这样就不用自己编译了）  </p>
+<h3 id="ipv6">IPv6</h3>
+<p>之前使用dhcpv6的办法，现在使用桥接将wan和lan桥接在一起，然后过滤掉网桥上的v4流量，就可以实现v4走nat，v6直连局域网所有的机器。</p>
+<pre><code>modprobe ip6table_mangle
+modprobe ebtable_broute
+ebtables -t broute -A BROUTING -p ! ipv6 -j DROP -i eth3
+brctl addif br0 eth3
+</code></pre>
+<p>  将以上文件写在开机脚本里就可以实现开机自动配置IPv6。 注意，以往都是用路由器克隆电脑的mac，用来支持学校的ip，mac绑定，如果是这样的情况下，你会发现执行以上命令后，电脑再也链接不了路由器，这是因为mac冲突造成的，只要修改一方的mac地址就可以修复。 学校的网总是掉线，为了断线重连，写了一个脚本，本人对于shell不甚了解，有更好的方法，欢迎指出。</p>
+<pre><code>#! /bin/bash
+#检测网络连接
+ping -c 1 114.114.114.114 &gt; /dev/null 2&gt;&amp;1
+if [ $? -eq 0 ];then
+   echo 检测网络正常
+else
+   echo 检测网络连接异常
+   killall drcom &amp;&amp;drcom
+fi</code></pre>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/hardware/">hardware</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/120.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">docker镜像</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/105.html">
+            <span class="next-text nav-default">玩转树莓派</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

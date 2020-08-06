@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data mining on 随风的博客</title>
+    <link>https://0xaa.top/tags/data-mining.html</link>
+    <description>Recent content in data mining on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 27 Mar 2019 16:42:26 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/tags/data-mining/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>正交非负矩阵分解</title>
+      <link>https://0xaa.top/post/%E6%AD%A3%E4%BA%A4%E9%9D%9E%E8%B4%9F%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3.html</link>
+      <pubDate>Wed, 27 Mar 2019 16:42:26 +0000</pubDate>
+      
+      <guid>https://0xaa.top/post/%E6%AD%A3%E4%BA%A4%E9%9D%9E%E8%B4%9F%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3.html</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;矩阵分解是我们研究的方向，其有多种多样的变化和形式，本文是对Chris Ding的一篇论文的翻译。文章为“Orthogonal Nonnegative Matrix Tri-factorizations for Clustering”,本文阐述了正交对于结果的约束和乘法迭代的影响。DOI:&lt;a href=&#34;https://doi.org/10.1145/1150402.1150420&#34;&gt;10.1145/1150402.1150420&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;abstract&#34;&gt;ABSTRACT&lt;/h1&gt;
+&lt;p&gt;目前，很多对于非负矩阵分解关注于二因子分解$X=FG^T$. 我们系统的提出了三因子分解$X=FSG^T$. 然而无约束的三因子分解是等价于无约束的二因子分解的,约束的三因子分解相对于二因子分解带来了新的特点. 我们研究正交约束因为它带来了更严谨的聚类解释性.我们提出了新的更新规则对于$F$,$S$,$G$,并且证明了算法的收敛性.我们对5个数据和实际案例进行了研究,显示我们的提出的双正交三因子分解具有对输入矩阵的行和列同时进行聚类的能力.我们基于类聚合分布和多风分布提出了一种新的聚类结果评估方式.我们同时也不同的NMF进行了一个概括.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

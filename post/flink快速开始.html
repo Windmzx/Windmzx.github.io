@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>flink快速开始 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content=" Apache Flink作为新一代的分布式处理引擎，用于对无界和有界数据进行状态计算。根据官方文档，flink可以支持有界和无界数据，即批处理和流处理，并将有界数据当做特殊的无界处理。根据官方文档，Flink具有更好的性能，更低的处理延时，相比storm更轻量的确认机制。
+  为了学习，首先我们就要自己搭建一套环境学习flink。官网的教程十分简单。。。自己摸索之后写下这个教程。
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/flink%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="flink快速开始" />
+<meta property="og:description" content="
+Apache Flink作为新一代的分布式处理引擎，用于对无界和有界数据进行状态计算。根据官方文档，flink可以支持有界和无界数据，即批处理和流处理，并将有界数据当做特殊的无界处理。根据官方文档，Flink具有更好的性能，更低的处理延时，相比storm更轻量的确认机制。
+
+
+为了学习，首先我们就要自己搭建一套环境学习flink。官网的教程十分简单。。。自己摸索之后写下这个教程。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/flink%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.html" />
+<meta property="article:published_time" content="2019-04-13T22:29:58+00:00" />
+<meta property="article:modified_time" content="2019-04-13T22:29:58+00:00" />
+<meta itemprop="name" content="flink快速开始">
+<meta itemprop="description" content="
+Apache Flink作为新一代的分布式处理引擎，用于对无界和有界数据进行状态计算。根据官方文档，flink可以支持有界和无界数据，即批处理和流处理，并将有界数据当做特殊的无界处理。根据官方文档，Flink具有更好的性能，更低的处理延时，相比storm更轻量的确认机制。
+
+
+为了学习，首先我们就要自己搭建一套环境学习flink。官网的教程十分简单。。。自己摸索之后写下这个教程。
+">
+<meta itemprop="datePublished" content="2019-04-13T22:29:58+00:00" />
+<meta itemprop="dateModified" content="2019-04-13T22:29:58+00:00" />
+<meta itemprop="wordCount" content="2072">
+
+
+
+<meta itemprop="keywords" content="Flink,分布式,流计算," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="flink快速开始"/>
+<meta name="twitter:description" content="
+Apache Flink作为新一代的分布式处理引擎，用于对无界和有界数据进行状态计算。根据官方文档，flink可以支持有界和无界数据，即批处理和流处理，并将有界数据当做特殊的无界处理。根据官方文档，Flink具有更好的性能，更低的处理延时，相比storm更轻量的确认机制。
+
+
+为了学习，首先我们就要自己搭建一套环境学习flink。官网的教程十分简单。。。自己摸索之后写下这个教程。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">flink快速开始</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-13 </span>
+        
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-基础环境搭建下载">一 基础环境搭建下载</a></li>
+    <li><a href="#二-测试代码编写">二 测试代码编写</a></li>
+    <li><a href="#三-netcat-下载安装">三 Netcat 下载安装</a></li>
+    <li><a href="#四-运行测试">四 运行测试</a>
+      <ul>
+        <li><a href="#本地环境测试">本地环境测试</a></li>
+        <li><a href="#提交到集群测试">提交到集群测试</a>
+          <ul>
+            <li><a href="#idea导出">idea导出</a></li>
+            <li><a href="#maven打包">maven打包</a></li>
+            <li><a href="#启动任务">启动任务</a></li>
+            <li><a href="#补充">补充</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>Apache Flink作为新一代的分布式处理引擎，用于对无界和有界数据进行状态计算。根据官方文档，flink可以支持有界和无界数据，即批处理和流处理，并将有界数据当做特殊的无界处理。根据官方文档，Flink具有更好的性能，更低的处理延时，相比storm更轻量的确认机制。</p>
+</blockquote>
+<blockquote>
+<p>为了学习，首先我们就要自己搭建一套环境学习flink。官网的教程十分简单。。。自己摸索之后写下这个教程。</p>
+</blockquote>
+<h1 id="一-基础环境搭建下载">一 基础环境搭建下载</h1>
+<p>Flink是基于Scala编写的一套框架，因为首先就需要我们安装Java和Scala环境。注意Java需要1.8版本以上。</p>
+<p><a href="https://www.scala-lang.org/download/all.html">Scala下载地址</a>。<a href="https://flink.apache.org/zh/downloads.html">Flink下载地址</a></p>
+<p>注意Scala和Flink存在版本对应关系，为了不必要的麻烦，我们尽量选择稳定且对应的版本下载。本文中Java为1.8版本，Scala为2.11，Flink版本为1.8.0版本。</p>
+<p>将Flink和Scala解压缩到/opt目录下，并将/bin加入PATH中。</p>
+<p>执行<code>./bin/start-cluster.sh </code>启动Flink，这里和官网教程有所不同， 你会发现并没有Taskmanager。 需要执行<code>./bin/taskmanager.sh start</code> 启动Taskmanager，和官网教程一样的效果。</p>
+<p><img src="https://img.0xaa.top/20190414124534.png" alt=""></p>
+<h1 id="二-测试代码编写">二 测试代码编写</h1>
+<p>官网上给出了一个简单的wordcount的demo，但是这个教程非常简单，对于没有接触的人，不好搭建出代码环境。</p>
+<p>首先我们在Idea里新建一个空白的项目，存储包括以后的所有学习代码。然后新建一个java module，并添加maven支持。</p>
+<p><img src="https://img.0xaa.top/20190413213717.png" alt=""></p>
+<p>在pom.xml里添加如下依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="c">&lt;!-- https://mvnrepository.com/artifact/org.apache.flink/flink-core --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>flink-core<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.8.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>flink-streaming-java_2.12<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.8.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>新建一个java类，将实例代码粘贴进去</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.apache.flink.api.common.functions.FlatMapFunction</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.api.common.functions.ReduceFunction</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.flink.api.java.utils.ParameterTool</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.datastream.DataStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.environment.StreamExecutionEnvironment</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.windowing.time.Time</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.util.Collector</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SocketWindowWordCount</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+
+        <span class="c1">// the port to connect to
+</span><span class="c1"></span>        <span class="kd">final</span> <span class="kt">int</span> <span class="n">port</span><span class="o">=</span><span class="n">9999</span><span class="o">;</span>
+
+
+        <span class="c1">// get the execution environment
+</span><span class="c1"></span>        <span class="kd">final</span> <span class="n">StreamExecutionEnvironment</span> <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="na">getExecutionEnvironment</span><span class="o">();</span>
+
+        <span class="c1">// get input data by connecting to the socket
+</span><span class="c1"></span>        <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">text</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="na">socketTextStream</span><span class="o">(</span><span class="s">&#34;localhost&#34;</span><span class="o">,</span> <span class="n">port</span><span class="o">,</span> <span class="s">&#34;\n&#34;</span><span class="o">);</span>
+
+        <span class="c1">// parse the data, group it, window it, and aggregate the counts
+</span><span class="c1"></span>        <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">WordWithCount</span><span class="o">&gt;</span> <span class="n">windowCounts</span> <span class="o">=</span> <span class="n">text</span>
+                <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="k">new</span> <span class="n">FlatMapFunction</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">WordWithCount</span><span class="o">&gt;()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">flatMap</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">,</span> <span class="n">Collector</span><span class="o">&lt;</span><span class="n">WordWithCount</span><span class="o">&gt;</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">value</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;\\s&#34;</span><span class="o">))</span> <span class="o">{</span>
+                            <span class="n">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="k">new</span> <span class="n">WordWithCount</span><span class="o">(</span><span class="n">word</span><span class="o">,</span> <span class="n">1L</span><span class="o">));</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">})</span>
+                <span class="o">.</span><span class="na">keyBy</span><span class="o">(</span><span class="s">&#34;word&#34;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">timeWindow</span><span class="o">(</span><span class="n">Time</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="n">5</span><span class="o">),</span> <span class="n">Time</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="n">1</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="k">new</span> <span class="n">ReduceFunction</span><span class="o">&lt;</span><span class="n">WordWithCount</span><span class="o">&gt;()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="n">WordWithCount</span> <span class="nf">reduce</span><span class="o">(</span><span class="n">WordWithCount</span> <span class="n">a</span><span class="o">,</span> <span class="n">WordWithCount</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">return</span> <span class="k">new</span> <span class="n">WordWithCount</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">word</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">count</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">count</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">});</span>
+
+        <span class="c1">// print the results with a single thread, rather than in parallel
+</span><span class="c1"></span>        <span class="n">windowCounts</span><span class="o">.</span><span class="na">print</span><span class="o">().</span><span class="na">setParallelism</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+
+        <span class="n">env</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="s">&#34;Socket Window WordCount&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Data type for words with count
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">WordWithCount</span> <span class="o">{</span>
+
+        <span class="kd">public</span> <span class="n">String</span> <span class="n">word</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kt">long</span> <span class="n">count</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">WordWithCount</span><span class="o">()</span> <span class="o">{}</span>
+
+        <span class="kd">public</span> <span class="nf">WordWithCount</span><span class="o">(</span><span class="n">String</span> <span class="n">word</span><span class="o">,</span> <span class="kt">long</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">word</span> <span class="o">+</span> <span class="s">&#34; : &#34;</span> <span class="o">+</span> <span class="n">count</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>	
+</code></pre></td></tr></table>
+</div>
+</div><p>使用Idea导包功能，导入所需的类，注意Time类不要导入错误。</p>
+<h1 id="三-netcat-下载安装">三 Netcat 下载安装</h1>
+<p>阅读实例代码，我们知道程序是监听一个websocket端口，并且对每一行进行分割，然后计算单位时间片内的单词总数。因此我们需要一个调试工具，netcat。</p>
+<p><a href="https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip">windows版下载</a></p>
+<p><a href="http://netcat.sourceforge.net/">Linux版本下载</a></p>
+<p>下载之后，将路径加入到PATH中。我们启动两个终端测试一下。</p>
+<p><code>nc -lL -p 9999</code>
+<code>nc localhost 9999</code>
+在一个窗口里键入内容，可以在其他窗口看到。
+<img src="https://img.0xaa.top/20190414130528.png" alt=""></p>
+<h1 id="四-运行测试">四 运行测试</h1>
+<p>像storm一样，我们可以使用本地环境进行测试，或者提交到集群上进行测试。首先我们介绍本地运行方法。</p>
+<h2 id="本地环境测试">本地环境测试</h2>
+<p>这种方法比较简单，我们在代码里设置监听本地的端口，首先将nc服务器启动，然后执行实例代码的main函数就可以运行代码。注意默认nc服务器只接受一个客户端连接。</p>
+<p><img src="https://img.0xaa.top/20190414131536.png" alt=""></p>
+<p>我们可以看到程序计算的是单位时间片内的单词的数量。</p>
+<h2 id="提交到集群测试">提交到集群测试</h2>
+<p>想要把程序提交到集群首先我们就需要将项目打包，打包的问题就是依赖的问题。Flink的集群为我们提供了运行时环境，因为在这个demo里，我们没有使用额外的依赖，因此我们只需要将我们写的代码打包进jar就可以。</p>
+<h3 id="idea导出">idea导出</h3>
+<p>idea自带打包成jar的功能，打开项目设置，点击Artifacs，选择新建一个jar配置</p>
+<p><img src="https://img.0xaa.top/20190414144758.png" alt=""></p>
+<p><img src="https://img.0xaa.top/20190414144812.png" alt=""></p>
+<p>然后添加Module Output， 选择我们的module.</p>
+<p><img src="https://img.0xaa.top/20190414145925.png" alt=""></p>
+<p>此外可以指定输出的目录，以及默认的MainClass，注意啊需要有meta-inf文件帮我们指定mainclass或者在提交jar到集群的时候手动指定mainclass。</p>
+<h3 id="maven打包">maven打包</h3>
+<p>当我们需要第三方各种依赖的时候，idea自带的导出功能就显得不够强大，我们可以使用maven的配置文件帮我们自动化打包jar。在maven中添加以下节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                         <span class="nt">&lt;archive&gt;</span>
+                            <span class="nt">&lt;manifest&gt;</span>
+                                <span class="nt">&lt;mainClass&gt;</span>com.mzx.SocketWindowWordCount<span class="nt">&lt;/mainClass&gt;</span>
+                            <span class="nt">&lt;/manifest&gt;</span>
+                        <span class="nt">&lt;/archive&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在idea里侧边点击package按钮或者使用<code>mvn package</code>命令都可以进行打包。</p>
+<h3 id="启动任务">启动任务</h3>
+<p>将jar包提交到服务器之后，我们就可以启动任务了。使用<code>./bin/flink run  MyFlink.jar</code>就可以启动脚本。然后我们在服务器上也启动一个netcat服务器，输入文字之后，我们发现flink并没有输出，这是因为stdout没有定向到屏幕，而是输出到文件里。我们查看log下的.out文件就可以发现任务计算出的单词的个数。</p>
+<p><img src="https://img.0xaa.top/20190414133728.png" alt=""></p>
+<h3 id="补充">补充</h3>
+<p>在之前的maven打包里，我们只对自己的文件进行了打包，而所需要的依赖由Flink环境为我们提供。当我们使用其他的依赖的时候，就需要我们将依赖也打包进jar里。这个时候可以使用如下的maven配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-assembly-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.1.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;archive&gt;</span>
+                    <span class="nt">&lt;manifest&gt;</span>
+                        <span class="nt">&lt;mainClass&gt;</span>com.mzx.SocketWindowWordCount<span class="nt">&lt;/mainClass&gt;</span>
+                    <span class="nt">&lt;/manifest&gt;</span>
+                <span class="nt">&lt;/archive&gt;</span>
+                <span class="nt">&lt;descriptorRefs&gt;</span>
+                    <span class="nt">&lt;descriptorRef&gt;</span>jar-with-dependencies<span class="nt">&lt;/descriptorRef&gt;</span>
+                <span class="nt">&lt;/descriptorRefs&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>make-assembly<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>single<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>EOF</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/flink/">Flink</a>
+          <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+          <a href="/tags/%E6%B5%81%E8%AE%A1%E7%AE%97/">流计算</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/isr-not-in-iram.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ISR NOT in IRAM</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/ndkandandroidstudio.html">
+            <span class="next-text nav-default">在AndroidStudio里进行NDK开发时mips支持不可用的问题</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

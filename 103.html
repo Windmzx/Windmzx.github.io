@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>hexo搭配nginx搭建静态博客 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content=" 这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。
+ 安装过程： 环境：Centos 7.1 x64
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/103.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="hexo搭配nginx搭建静态博客" />
+<meta property="og:description" content="
+这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。
+
+安装过程：
+环境：Centos 7.1 x64" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/103.html" />
+<meta property="article:published_time" content="2018-04-04T21:18:23+00:00" />
+<meta property="article:modified_time" content="2018-04-04T21:18:23+00:00" />
+<meta itemprop="name" content="hexo搭配nginx搭建静态博客">
+<meta itemprop="description" content="
+这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。
+
+安装过程：
+环境：Centos 7.1 x64">
+<meta itemprop="datePublished" content="2018-04-04T21:18:23+00:00" />
+<meta itemprop="dateModified" content="2018-04-04T21:18:23+00:00" />
+<meta itemprop="wordCount" content="570">
+
+
+
+<meta itemprop="keywords" content="blog," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="hexo搭配nginx搭建静态博客"/>
+<meta name="twitter:description" content="
+这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。
+
+安装过程：
+环境：Centos 7.1 x64"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">hexo搭配nginx搭建静态博客</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-04 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/"> 计算机杂论 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装过程">安装过程：</a>
+      <ul>
+        <li>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#nginx的简单命令">nginx的简单命令</a>
+      <ul>
+        <li>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>这是一次很崎岖的经历，网上的很多教程都是用本地的hexo和github的服务来搭建。但是git你懂得，在天朝很有可能被某墙屏蔽掉，还有的教程是gitcafe或者是coding的服务，但是gitcafe已经被coding收购了，coding的项目演示服务是收费的，一码币需要50RMB，对于我等穷学生来说，有点承受不起。于是我选择了腾讯的服务器，认证了学生身份之后单核1G每个月只需要1元钱，绝对是福利。马云家的ECS原来是每个月10元，现在每天只能30台抢购。。.。<br>
+Linux用来当服务器绝对是强大的，但是各种发行版之间，软件源不同，命令不同，配置方法也不同。绝对是令人蛋疼的问题。一个nginx的搭建我就踩了很多坑。。。</p>
+</blockquote>
+<h1 id="安装过程">安装过程：</h1>
+<p>环境：Centos 7.1 x64</p>
+<h4 id="1安装nodejs环境">1·安装node.js环境</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -sL https://deb.nodesource.com/setup | bash yum install -y nodejs 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2安装git环境">2·安装git环境</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">yum install git-core 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="3安装hexo">3·安装hexo</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install -g hexo 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="4新建目录">4·新建目录</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir /www hexo init /www cd /www npm install
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="5安装nginx">5·安装nginx</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm 
+sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm 
+sudo yum install nginx 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="6nginx反向代理的设置我的配置文件在etcnginxnginxconf">6·nginx反向代理的设置（我的配置文件在/etc/nginx/nginx.conf）</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">server { 
+	listen 80; 
+	server_name yourdomian.com, www.youdomain.com; 
+	location / 
+	{ 
+		proxy_pass http://127.0.0.1:4000/; 
+		proxy_redirect off; 
+		proxy_set_header X-Real-IP $remote_addr; 
+		proxy_set_header X-Forwarded-For 
+		$proxy_add_x_forwarded_for; 
+	} 
+} 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="7开启hexo服务">7·开启hexo服务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">bash cd /www hexo s 
+</code></pre></td></tr></table>
+</div>
+</div><p>在浏览器打开你的网页看看看效果吧</p>
+<h1 id="nginx的简单命令">nginx的简单命令</h1>
+<h4 id="启动-nginx">启动 ：nginx</h4>
+<h4 id="停止-nginx--s-stop">停止 ：nginx -s stop</h4>
+<h4 id="重新加载配置文件ngixn--s-reload">重新加载配置文件：ngixn -s reload</h4>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/blog/">blog</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/105.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">玩转树莓派</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/101.html">
+            <span class="next-text nav-default">路由器上进行drcom认证</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

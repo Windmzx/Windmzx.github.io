@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 随风的博客</title>
+    <link>https://0xaa.top/tags.html</link>
+    <description>Recent content in Tags on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 02 Apr 2020 11:13:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>二分</title>
+      <link>https://0xaa.top/tags/%E4%BA%8C%E5%88%86.html</link>
+      <pubDate>Thu, 02 Apr 2020 11:25:35 +0800</pubDate>
+      
+      <guid>https://0xaa.top/tags/%E4%BA%8C%E5%88%86.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>https://0xaa.top/tags/%E7%AE%97%E6%B3%95.html</link>
+      <pubDate>Thu, 02 Apr 2020 11:25:35 +0800</pubDate>
+      
+      <guid>https://0xaa.top/tags/%E7%AE%97%E6%B3%95.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>云计算</title>
+      <link>https://0xaa.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97.html</link>
+      <pubDate>Fri, 06 Sep 2019 19:31:40 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/%E4%BA%91%E8%AE%A1%E7%AE%97.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flink</title>
+      <link>https://0xaa.top/tags/flink.html</link>
+      <pubDate>Sat, 13 Apr 2019 22:29:58 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/flink.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分布式</title>
+      <link>https://0xaa.top/tags/%E5%88%86%E5%B8%83%E5%BC%8F.html</link>
+      <pubDate>Sat, 13 Apr 2019 22:29:58 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/%E5%88%86%E5%B8%83%E5%BC%8F.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>流计算</title>
+      <link>https://0xaa.top/tags/%E6%B5%81%E8%AE%A1%E7%AE%97.html</link>
+      <pubDate>Sat, 13 Apr 2019 22:29:58 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/%E6%B5%81%E8%AE%A1%E7%AE%97.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data mining</title>
+      <link>https://0xaa.top/tags/data-mining.html</link>
+      <pubDate>Wed, 27 Mar 2019 16:42:26 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/data-mining.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>matrix</title>
+      <link>https://0xaa.top/tags/matrix.html</link>
+      <pubDate>Tue, 19 Mar 2019 11:04:48 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/matrix.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://0xaa.top/tags/blog.html</link>
+      <pubDate>Thu, 13 Sep 2018 20:34:18 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/blog.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://0xaa.top/tags/docker.html</link>
+      <pubDate>Thu, 26 Jul 2018 09:19:01 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/docker.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>https://0xaa.top/tags/java.html</link>
+      <pubDate>Wed, 13 Jun 2018 08:50:08 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/java.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maven</title>
+      <link>https://0xaa.top/tags/maven.html</link>
+      <pubDate>Wed, 13 Jun 2018 08:50:08 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/maven.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spring</title>
+      <link>https://0xaa.top/tags/spring.html</link>
+      <pubDate>Wed, 30 May 2018 16:21:58 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/spring.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hardware</title>
+      <link>https://0xaa.top/tags/hardware.html</link>
+      <pubDate>Thu, 05 Apr 2018 19:41:11 +0000</pubDate>
+      
+      <guid>https://0xaa.top/tags/hardware.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

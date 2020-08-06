@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>基于maven的spring多module模块实战 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA&#43;maven&#43;sping boot 话不多说，直接上代码。
+1、建立父项目
+使用root来定义我们的父项目 建立好之后，删掉src目录，只留下pom.xml。 修改pom:
+ 把packaging方式由jar改为pom 如果父项目有build节点的话，删除掉  2分别建立几个module
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/159.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="基于maven的spring多module模块实战" />
+<meta property="og:description" content="写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA&#43;maven&#43;sping boot 话不多说，直接上代码。
+1、建立父项目
+使用root来定义我们的父项目  建立好之后，删掉src目录，只留下pom.xml。 修改pom:
+
+把packaging方式由jar改为pom
+如果父项目有build节点的话，删除掉
+
+2分别建立几个module" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/159.html" />
+<meta property="article:published_time" content="2018-05-30T20:09:07+00:00" />
+<meta property="article:modified_time" content="2018-05-30T20:09:07+00:00" />
+<meta itemprop="name" content="基于maven的spring多module模块实战">
+<meta itemprop="description" content="写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA&#43;maven&#43;sping boot 话不多说，直接上代码。
+1、建立父项目
+使用root来定义我们的父项目  建立好之后，删掉src目录，只留下pom.xml。 修改pom:
+
+把packaging方式由jar改为pom
+如果父项目有build节点的话，删除掉
+
+2分别建立几个module">
+<meta itemprop="datePublished" content="2018-05-30T20:09:07+00:00" />
+<meta itemprop="dateModified" content="2018-05-30T20:09:07+00:00" />
+<meta itemprop="wordCount" content="1590">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于maven的spring多module模块实战"/>
+<meta name="twitter:description" content="写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA&#43;maven&#43;sping boot 话不多说，直接上代码。
+1、建立父项目
+使用root来定义我们的父项目  建立好之后，删掉src目录，只留下pom.xml。 修改pom:
+
+把packaging方式由jar改为pom
+如果父项目有build节点的话，删除掉
+
+2分别建立几个module"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">基于maven的spring多module模块实战</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-05-30 </span>
+        <div class="post-category">
+            <a href="/categories/code/"> Code </a>
+            <a href="/categories/java/"> Java </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#moudel--studentjava">moudel -Student.java</a></li>
+            <li><a href="#dao-userdaojava">dao-UserDao.java</a></li>
+            <li><a href="#service">service</a></li>
+            <li><a href="#web">web</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>写毕业论文之后，博客文章题目起得的都学术化了。。。 当一个项目越来越大，我们需要划分模块避免一个项目变得臃肿。目前网上的例子都比较老，几经尝试才成功，因此记录下自己过程以便回忆，也是给其他朋友的一个参考。 技术栈 IDEA+maven+sping boot 话不多说，直接上代码。</p>
+<p>1、建立父项目</p>
+<p>使用root来定义我们的父项目 <img src="https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180530195808.png" alt=""> 建立好之后，删掉src目录，只留下pom.xml。 修改pom:</p>
+<ol>
+<li>把packaging方式由jar改为pom</li>
+<li>如果父项目有build节点的话，删除掉</li>
+</ol>
+<p>2分别建立几个module</p>
+<p>命名为model，dao，service，web，来分别保存每一层的代码。 <img src="https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180530195951.png" alt=""> 建好后的效果 <img src="https://img.0xaa.top/TIM%E6%88%AA%E5%9B%BE20180530200816.png" alt=""></p>
+<p>3.为整个工程添加依赖</p>
+<p>因为所有的module都是依赖于子项目的，因此我们可以直接把以来写进父项目。修改父项目的pom如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+    &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+    	xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+    	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    
+    	&lt;groupId&gt;com.mzx&lt;/groupId&gt;
+    	&lt;artifactId&gt;ntms&lt;/artifactId&gt;
+    	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    	&lt;modules&gt;
+    		&lt;module&gt;model&lt;/module&gt;
+    		&lt;module&gt;dao&lt;/module&gt;
+    		&lt;module&gt;service&lt;/module&gt;
+    		&lt;module&gt;web&lt;/module&gt;
+    	&lt;/modules&gt;
+    	&lt;packaging&gt;pom&lt;/packaging&gt;
+    
+    	&lt;name&gt;ntms&lt;/name&gt;
+    	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    
+    	&lt;parent&gt;
+    		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    		&lt;version&gt;2.0.2.RELEASE&lt;/version&gt;
+    		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    	&lt;/parent&gt;
+    
+    	&lt;properties&gt;
+    		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+    		&lt;java.version&gt;1.8&lt;/java.version&gt;
+    	&lt;/properties&gt;
+    
+    
+    &lt;dependencies&gt;
+    
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    		&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    	&lt;/dependency&gt;
+    
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    		&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+    	&lt;/dependency&gt;
+    
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    		&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+    		&lt;scope&gt;runtime&lt;/scope&gt;
+    	&lt;/dependency&gt;
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    		&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+    		&lt;scope&gt;test&lt;/scope&gt;
+    	&lt;/dependency&gt;
+    
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    		&lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    	&lt;/dependency&gt;
+    	&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;
+    	&lt;dependency&gt;
+    		&lt;groupId&gt;mysql&lt;/groupId&gt;
+    		&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    		&lt;version&gt;6.0.6&lt;/version&gt;
+    	&lt;/dependency&gt;
+    
+    &lt;/dependencies&gt;
+    
+    &lt;/project&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>boot节点指定了整个工程的spring版本，dependency则加入了一个springboot项目一些必要的依赖。model节点则定义了多个module</p>
+<p>4.添加其他子项目</p>
+<p>model项目的pom如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+    &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
+             xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+             xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+        &lt;parent&gt;
+            &lt;artifactId&gt;ntms&lt;/artifactId&gt;
+            &lt;groupId&gt;com.mzx&lt;/groupId&gt;
+            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;/parent&gt;
+        &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    
+        &lt;artifactId&gt;model&lt;/artifactId&gt;
+        &lt;groupId&gt;com.mzx&lt;/groupId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    
+    
+        &lt;build&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/build&gt;
+    &lt;/project&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>其中parent节点指定了父项目，并且加入了build节点，因为model项目打包之后提供给dao层调用。其中默认的定位信息不全，或者你想和父项目使用不同的报名。一定要指定好<code>artifactId,groupId,version 三条属性。因为在别的module也要用的到。</code> dao层的pom如下，与model不同的是，dao需要调用model的方法，因此他要依赖于model。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+    &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;
+             xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+             xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;
+        &lt;parent&gt;
+            &lt;artifactId&gt;ntms&lt;/artifactId&gt;
+            &lt;groupId&gt;com.mzx&lt;/groupId&gt;
+            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;/parent&gt;
+        &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    
+        &lt;artifactId&gt;dao&lt;/artifactId&gt;
+        &lt;groupId&gt;com.mzx&lt;/groupId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;artifactId&gt;model&lt;/artifactId&gt;
+                &lt;groupId&gt;com.mzx&lt;/groupId&gt;
+                &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    
+        &lt;build&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                &lt;/plugin&gt;
+            &lt;/plugins&gt;
+        &lt;/build&gt;
+    
+    &lt;/project&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>其他几层也依法炮制，值得注意的点就是需要添加对其他module的依赖，否则会报错。</p>
+<p>5.Idea的设置</p>
+<p>需要注意的一点是，虽然我们在pom里指定了各个module的依赖关系，但是IDEA并不能识别，需要我们在idea设置一下，否则代码提示上会有问题。 <img src="https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180530205531.png" alt=""> 添加对其他项目的module的依赖即可。</p>
+<p>6.代码Test</p>
+<h3 id="moudel--studentjava">moudel -Student.java</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    @Entity
+    public class Student {
+        @Id
+        Long id;
+        String username;
+        String name;
+        int sex;
+        int age;
+        @Column
+        int idcard;
+    
+        public Student() {
+        }
+    
+        public Student(String username, String name, int sex, int age, int idcard) {
+            this.username = username;
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.idcard = idcard;
+        }
+    //getter and setter
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p>这个地方需要注意的一点是除了你需要的构造函数之外，必须新建一个无参构造函数，否则orm框架无法利用反射填充对象的属性值。</p>
+<h3 id="dao-userdaojava">dao-UserDao.java</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    @Repository
+    public interface UserDao extends JpaRepository&lt;Student,Long&gt; {
+        List&lt;Student&gt; findByName(String name);
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p>dao层我们使用data-jpa,对于简单的方法，我们可以直接使用方法名即可完成sql的自动生成。</p>
+<h3 id="service">service</h3>
+<p>演示的service，我们直接返回dao层的查询结果就可以。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    @Service
+    public class TestService {
+    
+        @Autowired
+        UserDao userDao;
+        public List testservice(String username){
+            return userDao.findByName(username);
+        }
+    }
+    
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="web">web</h3>
+<p>我们直接使用一个restcontroller返回数据的查询结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    @Slf4j
+    @RestController
+    @RequestMapping(&#34;/&#34;)
+    public class HomeController {
+    
+        @Autowired
+        TestService service;
+    
+        @RequestMapping(value = &#34;/home/{name}&#34;)
+        public List&lt;Student&gt; home(@PathVariable(&#34;name&#34;)String name) {
+            log.info(&#34;jaja&#34;);
+            return service.testservice(name);
+        }
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p>新建一个Application类启动我们的项目</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    @SpringBootApplication
+    public class WebApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(WebApplication.class, args);
+        }
+    }
+</code></pre></td></tr></table>
+</div>
+</div><p>在resources下新建一个application.yml来存储我们的配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">logging:
+  level:
+    web: info
+    root: info
+spring:
+  datasource:
+    password: 123456
+    username: root
+    url: jdbc:mysql://localhost:3306/ntms?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+</code></pre></td></tr></table>
+</div>
+</div><p>启动项目之后，我们使用UI界面连接到数据库。发现jpa已经为我们新建好了数据表，我们插入一下假的数据，在浏览器下访问，可以返回结果就是正确的。至此我们的多module已经成功了。其中遇到了很多问题，我把一些较为复杂的记录在另一篇文章里。 [embed]https://0xaa.top/157.html[/embed]</p>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/166.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">maven打包项目成可执行文件</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/157.html">
+            <span class="next-text nav-default">spring多项目问题记录</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

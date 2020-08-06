@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on 随风的博客</title>
+    <link>https://0xaa.top/categories/%E7%AE%97%E6%B3%95.html</link>
+    <description>Recent content in 算法 on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 03 Apr 2020 14:32:07 +0800</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>二叉树最近的公共祖先节点</title>
+      <link>https://0xaa.top/post/lowestcommonancestorofabinarytree.html</link>
+      <pubDate>Fri, 03 Apr 2020 14:32:07 +0800</pubDate>
+      
+      <guid>https://0xaa.top/post/lowestcommonancestorofabinarytree.html</guid>
+      <description>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个</description>
+    </item>
+    
+    <item>
+      <title>LeetCode(42)TrappingRainWater</title>
+      <link>https://0xaa.top/post/trappingrainwater.html</link>
+      <pubDate>Fri, 03 Apr 2020 09:52:27 +0800</pubDate>
+      
+      <guid>https://0xaa.top/post/trappingrainwater.html</guid>
+      <description>接雨水，给定一个高度数组，求出这个高度数组构成的图形能接住多少雨水。 装水的问题，我们首先想到的就是最短木桶原理。对于每一个位置，它能装的水的</description>
+    </item>
+    
+    <item>
+      <title>搜索旋转排序数组</title>
+      <link>https://0xaa.top/post/searchinrotatedsortedarray.html</link>
+      <pubDate>Thu, 02 Apr 2020 16:56:00 +0800</pubDate>
+      
+      <guid>https://0xaa.top/post/searchinrotatedsortedarray.html</guid>
+      <description>这个题要求我们在一个经过旋转的排序数组中进行搜索。而且要求二分查找进行搜索。题目难以理解，其实就是二分的时候，先判断有序的那一半。因为有序我</description>
+    </item>
+    
+    <item>
+      <title>二分搜索边界</title>
+      <link>https://0xaa.top/post/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E8%BE%B9%E7%95%8C.html</link>
+      <pubDate>Thu, 02 Apr 2020 11:25:35 +0800</pubDate>
+      
+      <guid>https://0xaa.top/post/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2%E8%BE%B9%E7%95%8C.html</guid>
+      <description>这个题是leetcode在一个递增数组里寻找一个数字的范围。 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值</description>
+    </item>
+    
+  </channel>
+</rss>

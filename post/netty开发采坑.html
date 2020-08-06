@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Netty开发采坑 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="最近在学习Netty，一个高性能的I/O框架，在很多中间件中都在使用。想用netty实现一个聊天程序，在此期间遇到了很多问题。记录一下。 ctx.writeAndFlush() 和" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/post/netty%E5%BC%80%E5%8F%91%E9%87%87%E5%9D%91.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Netty开发采坑" />
+<meta property="og:description" content="最近在学习Netty，一个高性能的I/O框架，在很多中间件中都在使用。想用netty实现一个聊天程序，在此期间遇到了很多问题。记录一下。 ctx.writeAndFlush() 和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/post/netty%E5%BC%80%E5%8F%91%E9%87%87%E5%9D%91.html" />
+<meta property="article:published_time" content="2020-05-11T18:37:08+08:00" />
+<meta property="article:modified_time" content="2020-05-11T18:37:08+08:00" />
+<meta itemprop="name" content="Netty开发采坑">
+<meta itemprop="description" content="最近在学习Netty，一个高性能的I/O框架，在很多中间件中都在使用。想用netty实现一个聊天程序，在此期间遇到了很多问题。记录一下。 ctx.writeAndFlush() 和">
+<meta itemprop="datePublished" content="2020-05-11T18:37:08+08:00" />
+<meta itemprop="dateModified" content="2020-05-11T18:37:08+08:00" />
+<meta itemprop="wordCount" content="695">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Netty开发采坑"/>
+<meta name="twitter:description" content="最近在学习Netty，一个高性能的I/O框架，在很多中间件中都在使用。想用netty实现一个聊天程序，在此期间遇到了很多问题。记录一下。 ctx.writeAndFlush() 和"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Netty开发采坑</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-11 </span>
+        
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#ctxwriteandflush-和ctxchannlewriteandflush的区别">ctx.writeAndFlush() 和ctx.channle().writeAndFlush()的区别</a></li>
+            <li><a href="#长度分割">长度分割</a></li>
+            <li><a href="#spring注入顺序">spring注入顺序</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>最近在学习Netty，一个高性能的I/O框架，在很多中间件中都在使用。想用netty实现一个聊天程序，在此期间遇到了很多问题。记录一下。</p>
+</blockquote>
+<h3 id="ctxwriteandflush-和ctxchannlewriteandflush的区别">ctx.writeAndFlush() 和ctx.channle().writeAndFlush()的区别</h3>
+<p>ctx.writeAndFlush()是从handler链向前处理，而ctx.channle().writeAndFlush()会从handler链寻找最后一个outboud出口开始处理。</p>
+<p>按照正确的顺序添加handler可以避免无用的判断。</p>
+<h3 id="长度分割">长度分割</h3>
+<p>使用LengthFieldBasedFrameDecoder分割字节流组成包，发现无法传递消息到decode过程，将其注释之后decode出错，不能正确获取数据的长度。仔细检查发现是在之前的代码里服务器没有严格按照协议传输一串字符串过来，导致encode时获取到错误的长度和偏移量。反序列化出错抛出异常，因此后续的handler无法接受到消息。</p>
+<h3 id="spring注入顺序">spring注入顺序</h3>
+<p>当我们接受到一个请求之后，我们从他的类型就可以判断出消息的类型，从而调用相应的handler处理，而不需要在漫长的handler链上进行处理。因为我们可以在逻辑上平行的handler放到map里，根据消息类型直接调用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IMHandler</span> <span class="kd">extends</span> <span class="n">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="n">Packet</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Byte</span><span class="o">,</span> <span class="n">SimpleChannelInboundHandler</span><span class="o">&gt;</span> <span class="n">handlerMap</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="n">GroupCreateHandler</span> <span class="n">groupCreateHandler</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="n">GroupMessageHandler</span> <span class="n">groupMessageHandler</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="n">MessageHandler</span> <span class="n">messageHandler</span><span class="o">;</span>
+
+
+    
+    <span class="kd">private</span> <span class="nf">IMHandler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">handlerMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">CREATE_GROUP</span><span class="o">,</span> <span class="n">groupCreateHandler</span><span class="o">);</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">GROUP_MESSAGE</span><span class="o">,</span> <span class="n">groupMessageHandler</span><span class="o">);</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">MESSAGE_REQUEST</span><span class="o">,</span> <span class="n">messageHandler</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+	<span class="o">...</span><span class="na">do</span><span class="o">...{</span>
+	       <span class="n">handlerMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getCommond</span><span class="o">()).</span><span class="na">channelRead</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="n">msg</span><span class="o">);</span>
+	<span class="o">}</span>    
+     
+</code></pre></td></tr></table>
+</div>
+</div><p>但是调试的时候发现，map里的value都是空的。原因就是spring的注入是发生在构造函数之后的。我们可以将初始化代码放个一个单独的函数里并加上<code>@PostConstruct</code>注解。</p>
+<p>如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="nd">@PostConstruct</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">handlerMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">CREATE_GROUP</span><span class="o">,</span> <span class="n">groupCreateHandler</span><span class="o">);</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">GROUP_MESSAGE</span><span class="o">,</span> <span class="n">groupMessageHandler</span><span class="o">);</span>
+        <span class="n">handlerMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">Command</span><span class="o">.</span><span class="na">MESSAGE_REQUEST</span><span class="o">,</span> <span class="n">messageHandler</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/springboot%E9%83%A8%E7%BD%B2.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">SpringBoot部署</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/post/%E6%89%80%E6%9C%89%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html">
+            <span class="next-text nav-default">所有字母异位词</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 随风的博客</title>
+    <link>https://0xaa.top/tags/docker.html</link>
+    <description>Recent content in docker on 随风的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 26 Jul 2018 09:19:01 +0000</lastBuildDate>
+    
+	<atom:link href="https://0xaa.top/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker使用速记</title>
+      <link>https://0xaa.top/183.html</link>
+      <pubDate>Thu, 26 Jul 2018 09:19:01 +0000</pubDate>
+      
+      <guid>https://0xaa.top/183.html</guid>
+      <description>&lt;p&gt;docker作为最近新出现的技术，一下子席卷了全球的开发者社区，无论是科研或者是商业应用，其都获得了迅猛的发展。实验室搭建了docker-swarm集群，并部署了storm、haddop、web、git托管等一系列的服务。 在docke使用过程中遇到一些问题，记录在下面解决一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker集群故障排查</title>
+      <link>https://0xaa.top/139.html</link>
+      <pubDate>Sun, 08 Apr 2018 21:29:37 +0000</pubDate>
+      
+      <guid>https://0xaa.top/139.html</guid>
+      <description>&lt;h1 id=&#34;swarm集群&#34;&gt;swarm集群&lt;/h1&gt;
+&lt;p&gt;本来是想检查一下集群的安全状态，集群里挂载了一个ssr作为代理，想查阅一下日志。没想到docker集群挂了，甚至有一个刀片机器挂掉了，没办法只能叫厂商来修。 集群状态是所有的节点都不能执行管理命令。使用&lt;code&gt;docker node ls&lt;/code&gt;无法查看节点身份直接返回错误&lt;img src=&#34;https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180513193220.png&#34; alt=&#34;&#34;&gt; 尝试几次之后判断无法解决。使用命令&lt;code&gt;docker swarm leave -force&lt;/code&gt;强制离开集群，并重建集群。 此时时间到了晚上，第二天继续维护的时候，发现管理节点依然不能管理报错如下 &lt;img src=&#34;https://img.0xaa.top/TIM%E5%9B%BE%E7%89%8720180513193748.png&#34; alt=&#34;&#34;&gt; 后来发现是node节点身份发生了变化，登陆节点失去了管理员节点身份。ssh到另一台机器上之后重新生成一个token就能成功加入了。 至此docker swarm解决完毕。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>docker镜像</title>
+      <link>https://0xaa.top/120.html</link>
+      <pubDate>Fri, 06 Apr 2018 18:07:05 +0000</pubDate>
+      
+      <guid>https://0xaa.top/120.html</guid>
+      <description>酸酸乳 FROM ubuntu:16.04 MAINTAINER mzx 2281927774@qq.com RUN apt-get update --fix-missing &amp;amp;&amp;amp; apt-get install -y git &amp;amp;&amp;amp; apt-get clean RUN git clone https://github.com/ssrbackup/shadowsocksr /usr CMD [&amp;quot;python&amp;quot;,&amp;quot;/usr/shadowsocksr/shadowsocks/local.py&amp;quot;,&amp;quot;-c&amp;quot;,&amp;quot;/etc/shadowsocks.json&amp;quot;] python环境 FROM ubuntu:16.04 MAINTAINER mzx 2281927774@qq.com RUN apt-get update --fix-missing &amp;amp;&amp;amp; apt-get install -y wget bzip2 ca- libglib2.0-0 libxext6 libsm6 libxrender1 git vim fish RUN echo &#39;export PATH=/opt/conda/bin:$PATH&#39; &amp;gt; /etc/profile.d/conda.sh wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Li /bin/bash ~/anaconda.sh -b</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>python问题记录 - 随风的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="mzx" /><meta name="description" content="在这里放一些写代码中遇到的Python问题
+&amp;lsquo;module&amp;rsquo; object has no attribute &amp;lsquo;SSL_ST_INIT&amp;rsquo;  google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。
+1 2 3  rm -rf /usr/lib/python2.7/dist-packages/OpenSSL rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info sudo pip install pyopenssl    stackoverflow
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://0xaa.top/204.html" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="python问题记录" />
+<meta property="og:description" content="在这里放一些写代码中遇到的Python问题
+&lsquo;module&rsquo; object has no attribute &lsquo;SSL_ST_INIT&rsquo;
+
+google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。
+
+
+1
+2
+3
+
+
+    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL
+    rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info
+    sudo pip install pyopenssl
+
+
+  stackoverflow" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://0xaa.top/204.html" />
+<meta property="article:published_time" content="2018-11-26T15:55:19+00:00" />
+<meta property="article:modified_time" content="2018-11-26T15:55:19+00:00" />
+<meta itemprop="name" content="python问题记录">
+<meta itemprop="description" content="在这里放一些写代码中遇到的Python问题
+&lsquo;module&rsquo; object has no attribute &lsquo;SSL_ST_INIT&rsquo;
+
+google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。
+
+
+1
+2
+3
+
+
+    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL
+    rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info
+    sudo pip install pyopenssl
+
+
+  stackoverflow">
+<meta itemprop="datePublished" content="2018-11-26T15:55:19+00:00" />
+<meta itemprop="dateModified" content="2018-11-26T15:55:19+00:00" />
+<meta itemprop="wordCount" content="786">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python问题记录"/>
+<meta name="twitter:description" content="在这里放一些写代码中遇到的Python问题
+&lsquo;module&rsquo; object has no attribute &lsquo;SSL_ST_INIT&rsquo;
+
+google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。
+
+
+1
+2
+3
+
+
+    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL
+    rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info
+    sudo pip install pyopenssl
+
+
+  stackoverflow"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wind</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/categories.html">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/post.html">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags.html">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about.html">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wind</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/categories.html">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post.html">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags.html">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about.html">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">python问题记录</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-11-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9D%82%E8%AE%BA/"> 计算机杂论 </a>
+            </div>
+          <span class="more-meta">  </span>
+          <span class="more-meta">  </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#module-object-has-no-attribute-ssl_st_init">&lsquo;module&rsquo; object has no attribute &lsquo;SSL_ST_INIT&rsquo;</a></li>
+        <li><a href="#utf8编码问题">utf8编码问题</a></li>
+        <li><a href="#python-requirement">python requirement</a></li>
+        <li><a href="#安装cudamat的遇到的问题">安装cudamat的遇到的问题</a></li>
+        <li><a href="#python快速多进程">python快速多进程</a></li>
+        <li><a href="#not-utf8-encoded-saving-disable">not utf8 encoded saving disable</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在这里放一些写代码中遇到的Python问题</p>
+<h2 id="module-object-has-no-attribute-ssl_st_init">&lsquo;module&rsquo; object has no attribute &lsquo;SSL_ST_INIT&rsquo;</h2>
+<hr>
+<p>google得到信息是python的ssl包版本不对，需要升级版本。然而在这种情况下，你无论执行什么命令都会导致这个错误，因此不能卸载掉原来的版本安装新的，需要手动处理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    rm -rf /usr/lib/python2.7/dist-packages/OpenSSL
+    rm -rf /usr/lib/python2.7/dist-packages/pyOpenSSL-0.15.1.egg-info
+    sudo pip install pyopenssl
+</code></pre></td></tr></table>
+</div>
+</div><p>  <a href="https://stackoverflow.com/questions/45188413/python-pip-install-is-failing-with-attributeerror-module-object-has-no-att/45291334#45291334?newreg=12af3db87aad43459735cbd7b3854604">stackoverflow</a></p>
+<h2 id="utf8编码问题">utf8编码问题</h2>
+<p>有的时候遇到# coding: utf-8都解决不了的编码问题，可以用下面的方法解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    # coding: utf-8
+    import sys
+    reload(sys)
+    sys.setdefaultencoding(&#39;utf8&#39;)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="python-requirement">python requirement</h2>
+<hr>
+<p>为了当你想要分享或开源一个python项目的时候，需要生成<code>requirements.txt</code>文件，以便别人能快速的安装项目所需的依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    pip freeze &gt; requirements.
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装cudamat的遇到的问题">安装cudamat的遇到的问题</h2>
+<hr>
+<p>有的时候安装了cuda之后再安装cudamat用于python中的矩阵加速，提示你nvcc不存在，可以用下面的方式解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    sudo env &#34;PATH=$PATH&#34; python setup.py install
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="python快速多进程">python快速多进程</h2>
+<p>众所周知Python是默认只能进行单个线程的进行计算，即使你手动开启了多线程，由于全局解释器锁（GIL）的问题，程序也只能使用一个cpu核心进行运行。对于IO密集型的程序还有一定的加速作用，面对计算密集型的任务来说，多线程就无能为力了。因为出现了一个包Multiprocessing可以帮你快速的实现多线程。 我们可以使用以下的代码模板来快速实现for 循环</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    from multiprocessing import Pool
+    def computefun(object):
+        # do compute
+    if __name__ == &#39;__main__&#39;:
+        pool = Pool(60)
+        pool.map(loadats, lines)
+</code></pre></td></tr></table>
+</div>
+</div><p>Pool的参数是创建线程的数量，如是计算密集型的任务，尽量将数量设置为和你的cpu核数一样多，如果是I/O密集型则可以适当地增加数量。对于快速完成任务有很大的帮助。</p>
+<h2 id="not-utf8-encoded-saving-disable">not utf8 encoded saving disable</h2>
+<p>使用jupyternotebook写了个爬虫，将数据存到文件中之后，用jupyter打开失败，发现提示<code>not utf8 encoded saving disable</code>这个错误，搜索后发现这个是因为代码里使用的是pickle进行保存，存的不是纯文本文件，所以直接打开或者是用jupyter都不能正常阅读，使用pickle进行load之后即可正常使用。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC.html">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">矩阵求导</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        <a class="next" href="/200.html">
+            <span class="next-text nav-default">实验室网站问题排查</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://0xaa.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">mzx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
